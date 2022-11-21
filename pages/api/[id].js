@@ -24,7 +24,7 @@ export default async function getBankUrl(req, res) {
   await tokenHandler(client);
 
   const init = await client.initSession({
-    redirectUrl: "http://localhost:3000/",
+    redirectUrl: "https://financiaio.vercel.app/",
     institutionId: id,
     referenceId: randomUUID(),
   });
