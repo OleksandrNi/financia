@@ -52,6 +52,14 @@
       flex-direction: column;
     }
 
+    &_title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
     &_text {
       max-width: 260px;
     }
@@ -62,6 +70,22 @@
       align-items: center;
       font-size: 18px;
       margin-bottom: 10px;
+    }
+
+    &_balances {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 5px;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #000;
+
+      &_item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed #000;
+      }
     }
 
     &_window {
@@ -78,6 +102,7 @@
 
     &_cards {
       display: flex;
+      flex-direction: column;
     }
   }
 
@@ -85,7 +110,8 @@
     display: flex;
     position: relative;
     align-items: flex-end;
-    margin: 40px 0 40px;
+    justify-content: center;
+    margin: 40px 0 0;
 
     &_bar {
       display: flex;

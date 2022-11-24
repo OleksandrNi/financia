@@ -38,14 +38,29 @@ export default function BankAccountInfoModal({ acc }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        backgroundColor: "#fff",
+        width: "100px",
+        height: "60px",
+        padding: "5px",
+        border: "1px solid #000",
+        borderRadius: "5px",
+        color: "#000",
+        fontWeight: "700",
+      }}
+    >
       <div
         onClick={handleOpen}
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          border: "1px solid #000",
+          flexDirection: "column",
           borderRadius: "5px",
           padding: "5px",
           width: "100px",
@@ -56,16 +71,17 @@ export default function BankAccountInfoModal({ acc }) {
         <img
           src={acc.bank_logo}
           alt="bank logo"
-          style={{ height: "60px", maxWidth: "90px" }}
+          style={{ boxSizing: "border-box", height: "60px", maxWidth: "90px" }}
         />
+        <span>{acc.bank_name}</span>
       </div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-        <img
-          src={acc.bank_logo}
-          alt="bank logo"
-          style={{ height: "60px", maxWidth: "90px" }}
-        />
+          <img
+            src={acc.bank_logo}
+            alt="bank logo"
+            style={{ height: "60px", maxWidth: "90px" }}
+          />
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Bank Account Information
           </Typography>

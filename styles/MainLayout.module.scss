@@ -11,6 +11,10 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
+
+    @media (max-width: 500px) {
+      display: none;
+    }
   }
 
   &_link {
@@ -22,7 +26,7 @@
   }
 
   &_logo {
-    height: 50px;
+    height: 40px;
     width: 200px;
     cursor: pointer;
     background-image: url("https://financia.io/wp-content/uploads/2021/03/04032021_financiaLogo-300x77.png");
@@ -51,4 +55,18 @@
   height: 7vh;
   padding: 5px;
   color: #fff;
+
+  &_nav {
+    @media (max-width: 500px) {
+      display: flex;
+      background-color: #fff;
+      width: 280px;
+      justify-content: space-around;
+      margin-bottom: 10px;
+      padding: 8px 8px 4px;
+      border-radius: 5px;
+    }
+
+    display: none;
+  }
 }

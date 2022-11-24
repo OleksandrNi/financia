@@ -12,6 +12,12 @@ export default function blog() {
         <a href="https://financia.io" target="_blank">
           <h2>redirect to financia (click)</h2>
         </a>
+
+        <div className={styles.dialogs}>
+          <div className={styles.dialog} style={{
+            backgroundImage: 'url(https://financia.io/wp-content/uploads/elementor/thumbs/Photo-Miha-pv176i41wy53aolnra2n9f1ppbrg76guvb7txbl09s.jpg)',
+          }}></div>
+        </div>
       </div>
     </MainLayout>
   );

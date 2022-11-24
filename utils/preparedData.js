@@ -61,6 +61,9 @@ export function preparedData(userAccountBankData, countryBankList) {
         bankName = countryBankList.data[n].name;
       }
     }
+
+    let lastFiveTransaction = userAccountBankData[i].transactions.transactions.booked.slice(0,5);
+
     connectedBank.push({
       id: userAccountBankData[i].accountId,
       balances_cur:
@@ -76,6 +79,7 @@ export function preparedData(userAccountBankData, countryBankList) {
       monthTransactionInfo,
       sendTotalPayment,
       recievedTotalPayment,
+      lastFiveTransaction,
     });
   }
   return connectedBank;

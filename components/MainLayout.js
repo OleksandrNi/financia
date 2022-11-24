@@ -3,6 +3,10 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
+import WindowIcon from "@mui/icons-material/Window";
+import SettingsIcon from "@mui/icons-material/Settings";
+import RssFeedIcon from "@mui/icons-material/RssFeed";
+import AddIcon from "@mui/icons-material/Add";
 
 import { readUserData } from "../firebase/readUserData";
 import { useUser } from "../firebase/useUser";
@@ -62,7 +66,28 @@ export function MainLayout({ children, title }) {
       </header>
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>
-        <h2>footer</h2>
+        <div className={styles.footer_nav}>
+          <Link href={"/"}>
+            <a className={styles.footer_link}>
+              <WindowIcon sx={{ color: "grey" }} />
+            </a>
+          </Link>
+          <Link href={"/blog"}>
+            <a className={styles.footer_link}>
+              <RssFeedIcon sx={{ color: "grey" }} />
+            </a>
+          </Link>
+          <Link href={"/settings"}>
+            <a className={styles.footer_link}>
+              <SettingsIcon sx={{ color: "grey" }} />
+            </a>
+          </Link>
+          <Link href={"/add-bank"}>
+            <a className={styles.footer_link}>
+              <AddIcon sx={{ color: "grey" }} />
+            </a>
+          </Link>
+        </div>
       </footer>
     </>
   );

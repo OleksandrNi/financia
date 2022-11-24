@@ -1,21 +1,20 @@
-import Link from "next/link";
 import NordigenClient from "nordigen-node";
-import * as cookie from "cookie";
-import bracket from "../images/bracket.png";
-import Image from "next/image";
 import { Oval } from "react-loader-spinner";
+import Tooltip from "@mui/joy/Tooltip";
+import * as cookie from "cookie";
+import Link from "next/link";
 
-import BankAccountInfoModal from "../components/BankAccountInfoModal";
 import { readUserData } from "../firebase/readUserData";
 import { writeUserData } from "../firebase/writeUserData";
 import { MainLayout } from "../components/MainLayout";
-import NotAuthPage from "../components/NotAuthPage";
+import NotAuthPage from "../components/notAuthPage";
 import MonthCard from "../components/MonthCard";
 import { useUser } from "../firebase/useUser";
 
 import styles from "../styles/Home.module.scss";
 import { tokenHandler } from "../utils/tokenHandler";
 import { preparedData } from "../utils/preparedData";
+import { CenterFocusStrong } from "@mui/icons-material";
 
 export default function Home({ connectedBank }) {
   const { user } = useUser();
@@ -32,6 +31,7 @@ export default function Home({ connectedBank }) {
   let categoryOneMonthAgo = {};
   let categoryTwoMonthAgo = {};
   let categoryThreeMonthAgo = {};
+  let lastTransaction = [];
 
   if (connectedBank) {
     for (let i = 0; i < connectedBank.length; i++) {
@@ -51,6 +51,10 @@ export default function Home({ connectedBank }) {
       let obj0 = connectedBank[i].monthTransactionInfo[0].sortCategoryByMonth;
       let obj1 = connectedBank[i].monthTransactionInfo[1].sortCategoryByMonth;
       let obj2 = connectedBank[i].monthTransactionInfo[2].sortCategoryByMonth;
+      lastTransaction = [
+        ...lastTransaction,
+        ...connectedBank[i].lastFiveTransaction,
+      ];
 
       const reduceCategory = (obj, initial) =>
         Object.keys(obj).reduce((result, current) => {
@@ -88,32 +92,25 @@ export default function Home({ connectedBank }) {
     smallBar = recievedOneMonthAgo;
   }
 
+  const preparedLastTransaction = lastTransaction.sort((a, b) => {
+    return new Date(b.bookingDate) - new Date(a.bookingDate);
+  });
+
   if (user) {
     return (
       <MainLayout title={"Home"}>
         {connectedBank ? (
           <div className={styles.dashboard}>
             {connectedBank.length ? (
-              <div className={styles.dashboard_banks}>
-                <div className={styles.dashboard_banks_list}>
-                  {connectedBank.map((acc) => (
-                    <div key={acc.id}>
-                      <BankAccountInfoModal acc={acc} />
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.dashboard_banks_list_link}>
-                  <Link href={"/add-bank"}>
-                    <a>Add bank</a>
-                  </Link>
-                </div>
-              </div>
-            ) : null}
-
-            {connectedBank.length ? (
               <div className={styles.dashboard_dash}>
                 <div className={styles.dashboard_dash_graph}>
                   <div>
+                    <div className={styles.dashboard_dash_title}>
+                      Hey there,
+                    </div>
+                    <div className={styles.dashboard_dash_title}>
+                      Your daily summury is ready!
+                    </div>
                     <div className={styles.dashboard_dash_balance}>
                       <div className={styles.dashboard_dash_text}>
                         Your total available balance is
@@ -122,11 +119,28 @@ export default function Home({ connectedBank }) {
                         {Math.floor(totalBalance)}€
                       </div>
                     </div>
+                    <div className={styles.dashboard_dash_balances}>
+                      {connectedBank.map((acc) => (
+                        <div className={styles.dashboard_dash_balances_item}>
+                          <div>{acc.bank_name || "account"}</div>{" "}
+                          <div>{acc.balances_amount}€</div>
+                        </div>
+                      ))}
+                    </div>
                     <br />
                     <div className={styles.dashboard_dash_balance}>
-                      <div className={styles.dashboard_dash_text}>
-                        Projected spending based on past 3 month
-                      </div>
+                      <Tooltip
+                        title={
+                          <span style={{ color: "white" }}>
+                            *based on an average of the past 3 months of your
+                            data
+                          </span>
+                        }
+                      >
+                        <span className={styles.dashboard_dash_text}>
+                          Projected monthly spending*
+                        </span>
+                      </Tooltip>
                       <span className={styles.dashboard_dash_window}>
                         {Math.floor(-sendQuarterPayment / 3)}€
                       </span>
@@ -148,7 +162,7 @@ export default function Home({ connectedBank }) {
                           backgroundColor: "green",
                         }}
                       >
-                        {bigBar}
+                        {bigBar}€
                       </div>
                       <div>{isBiggestSum ? "Inflow" : "Outflow"}</div>
                     </div>
@@ -162,48 +176,31 @@ export default function Home({ connectedBank }) {
                       <div
                         className={styles.dashboard_grapharea_bar}
                         style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          textAlign: 'center',
+                          height: `${
+                            ((bigBar - smallBar) / bigBar) * 250 - 5
+                          }px`,
+                          backgroundColor: "lightblue",
+                          marginBottom: "5px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <div style={{fontSize: '14px'}}>Net Monthly Cash flow</div>
+                        {isBiggestSum ? "+" : "-"}
+                        {Math.floor(bigBar - smallBar)}€
+                      </div>
+                      <div
+                        className={styles.dashboard_grapharea_bar}
+                        style={{
                           height: `${(smallBar / bigBar) * 250}px`,
                           backgroundColor: "orange",
                         }}
                       >
-                        {smallBar}
+                        {smallBar}€
                       </div>
                       <div>{isBiggestSum ? "Outflow" : "Inflow"}</div>
-                    </div>
-                    <div
-                      style={{
-                        width: "20px",
-                        position: "relative",
-                        top: `-${(smallBar / bigBar) * 250 + 20}px`,
-                      }}
-                    >
-                      <Image
-                        src={bracket}
-                        alt="Difference"
-                        width={500}
-                        automatically
-                        provided
-                        height={((bigBar - smallBar) / bigBar) * 250 * 25}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "40%",
-                          right: "-80px",
-                        }}
-                      >
-                        <div style={{ fontSize: "12px" }}>Net Cash flow</div>
-                        <div
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "700",
-                            color: "green",
-                          }}
-                        >
-                          {isBiggestSum ? "+" : "-"}{" "}
-                          {Math.floor(bigBar - smallBar)}€
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -213,6 +210,21 @@ export default function Home({ connectedBank }) {
                     recievedOneMonthAgo={recievedOneMonthAgo}
                     sendOneMonthAgo={sendOneMonthAgo}
                   />
+                  <br />
+                  <span className={styles.dashboard_dash_text}>
+                    Last 5 transaction
+                  </span>
+                  <div className={styles.dashboard_dash_balances}>
+                    {preparedLastTransaction.slice(0, 5).map((tac) => (
+                      <div
+                        key={tac.transactionId}
+                        className={styles.dashboard_dash_balances_item}
+                      >
+                        <div>{tac.enrichment.displayName || "transaction"}</div>{" "}
+                        <div>{tac.transactionAmount.amount}€</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -382,6 +394,7 @@ export async function getServerSideProps({ req }) {
 
   if (userAccountBankData) {
     connectedBank = preparedData(userAccountBankData, countryBankList);
+    writeUserData(user, connectedBank, "connectedBankList");
   }
   return { props: { connectedBank } };
 }
