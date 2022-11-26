@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>
         {`
           body {
-            font-family: "Didact Gothic", sans-serif;
+            font-family: "Didact Gothic", "Playfair Display", sans-serif;
           }
         `}
       </style>

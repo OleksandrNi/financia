@@ -40,15 +40,14 @@ export default function addBank({ institutions }) {
           <span className={styles.connected_title}>Connected bank account</span>
           {bankList &&
             bankList.map((acc) => (
-              <div key={acc.id} className={styles.link}>
+              <div
+                key={acc.id}
+                className={styles.link}
+                style={{ marginBottom: "5px" }}
+              >
                 <BankAccountInfoModal acc={acc} />
               </div>
             ))}
-          {/* <div className={styles.link}>
-            <Link href={"/add-bank"}>
-              <a>Add bank</a>
-            </Link>
-          </div> */}
         </div>
         <div>
           <div className={styles.connected_title}>List of available Banks</div>
