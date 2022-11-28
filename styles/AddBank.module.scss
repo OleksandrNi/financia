@@ -1,6 +1,5 @@
 .addbank {
   display: flex;
-  // flex-wrap: wrap;
   width: 100%;
   height: 100%;
   background-color: #141d47;
@@ -49,6 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   border: 1px solid #000;
   border-radius: 5px;
   padding: 5px;

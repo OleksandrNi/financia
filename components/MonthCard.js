@@ -10,24 +10,16 @@ export default function MonthCard({ category }) {
     }
   }
 
-  
-
-  const sortCategory = data
-    .sort(function (a, b) {
-      return b[1] - a[1];
-    })
-    .slice(1, 4);
-
   const options = {
     legend: {
       position: "bottom",
       alignment: "center",
       textStyle: { color: "#fff" },
     },
-    // pieSliceText: "label",
-
+    tooltip: {
+      trigger: "none",
+    },
     chartArea: { left: "0", right: "0", top: "10", bottom: "40" },
-    // title: "Add title",
     pieStartAngle: 100,
     backgroundColor: "#141d47",
     width: "380",
@@ -72,21 +64,20 @@ export default function MonthCard({ category }) {
   return (
     <div style={styles.cards}>
       <div style={styles.month}>
-        <div style={{ fontSize: "18px", marginBottom: "20px" }}>
+        <div
+          style={{
+            fontSize: "18px",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
           Your Expenses categorised
         </div>
-        {/* {sortCategory.map((cat) => (
-          <div style={styles.balance} key={cat[0]}>
-            <div style={styles.expend}>{cat[0]}</div>
-            <div style={styles.sum}>{Math.floor(cat[1])}€</div>
-          </div>
-        ))} */}
         <Chart
           chartType="PieChart"
           data={data}
           options={options}
           width={"100%"}
-          // height={"400px"}
         />
         {data.slice(1).map((cat) => (
           <div style={styles.balance} key={cat[0]}>

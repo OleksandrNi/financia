@@ -7,14 +7,13 @@ import Link from "next/link";
 import { readUserData } from "../firebase/readUserData";
 import { writeUserData } from "../firebase/writeUserData";
 import { MainLayout } from "../components/MainLayout";
-import NotAuthPage from "../components/NotAuthPage";
+import NotAuthPage from "../components/notAuthPage";
 import MonthCard from "../components/MonthCard";
 import { useUser } from "../firebase/useUser";
 
 import styles from "../styles/Home.module.scss";
 import { tokenHandler } from "../utils/tokenHandler";
 import { preparedData } from "../utils/preparedData";
-import { CenterFocusStrong } from "@mui/icons-material";
 
 export default function Home({ connectedBank }) {
   const { user } = useUser();
@@ -72,12 +71,6 @@ export default function Home({ connectedBank }) {
       categoryThreeMonthAgo = reduceCategory(obj2, categoryThreeMonthAgo);
     }
   }
-
-  const category = [
-    categoryOneMonthAgo,
-    categoryTwoMonthAgo,
-    categoryThreeMonthAgo,
-  ];
 
   let bigBar;
   let smallBar;
