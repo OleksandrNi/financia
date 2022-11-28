@@ -7,7 +7,7 @@ import Link from "next/link";
 import { readUserData } from "../firebase/readUserData";
 import { writeUserData } from "../firebase/writeUserData";
 import { MainLayout } from "../components/MainLayout";
-import NotAuthPage from "../components/notAuthPage";
+import NotAuthPage from "../components/NotAuthPage";
 import MonthCard from "../components/MonthCard";
 import { useUser } from "../firebase/useUser";
 
