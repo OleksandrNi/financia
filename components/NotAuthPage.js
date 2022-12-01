@@ -16,7 +16,13 @@ export default function NotAuthPage() {
         ></a>
         {!showAuth ? (
           <Button
-            sx={{}}
+            sx={{
+              widht: "28px",
+              fontSize: "10px",
+              padding: "2px",
+              backgroundColor: "#CD447D",
+              color: "#fff",
+            }}
             variant="outlined"
             onClick={() => setShowAuth(!showAuth)}
           >
@@ -37,9 +43,7 @@ export default function NotAuthPage() {
         ) : null}
         {showAuth ? <FirebaseAuth /> : null}
       </main>
-      <footer className={styles.notauth_footer}>
-        <h2>footer</h2>
-      </footer>
+      <footer className={styles.notauth_footer}></footer>
     </div>
   );
 }

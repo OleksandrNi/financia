@@ -22,7 +22,7 @@ export default function MonthCard({ category }) {
     chartArea: { left: "0", right: "0", top: "10", bottom: "40" },
     pieStartAngle: 100,
     backgroundColor: "#141d47",
-    width: "380",
+    width: "280",
     height: "280",
   };
 

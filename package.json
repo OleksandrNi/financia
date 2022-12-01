@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +25,7 @@
     "js-cookie": "^2.2.1",
     "jwt-check-expiration": "^1.0.5",
     "next": "12",
+    "next-pwa": "^5.6.0",
     "next-redux-wrapper": "^8.0.0",
     "nextjs-progressbar": "^0.0.16",
     "nordigen-node": "^1.1.1",

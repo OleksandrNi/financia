@@ -7,7 +7,7 @@ import Link from "next/link";
 import { readUserData } from "../firebase/readUserData";
 import { writeUserData } from "../firebase/writeUserData";
 import { MainLayout } from "../components/MainLayout";
-import NotAuthPage from "../components/NotAuthPage";
+import NotAuthPage from "../components/notAuthPage";
 import MonthCard from "../components/MonthCard";
 import { useUser } from "../firebase/useUser";
 
@@ -116,7 +116,7 @@ export default function Home({ connectedBank }) {
                       {connectedBank.map((acc) => (
                         <div className={styles.dashboard_dash_balances_item}>
                           <div>{acc.bank_name || "account"}</div>{" "}
-                          <div>{acc.balances_amount}€</div>
+                          <div>{acc.balances_amount.replace(".", ",")}€</div>
                         </div>
                       ))}
                     </div>
@@ -155,7 +155,7 @@ export default function Home({ connectedBank }) {
                           backgroundColor: "green",
                         }}
                       >
-                        {bigBar}€
+                        {Math.floor(bigBar)}€
                       </div>
                       <div>{isBiggestSum ? "Inflow" : "Outflow"}</div>
                     </div>
@@ -169,9 +169,9 @@ export default function Home({ connectedBank }) {
                       <div
                         className={styles.dashboard_grapharea_bar}
                         style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          textAlign: 'center',
+                          display: "flex",
+                          flexDirection: "column",
+                          textAlign: "center",
                           height: `${
                             ((bigBar - smallBar) / bigBar) * 250 - 5
                           }px`,
@@ -180,7 +180,9 @@ export default function Home({ connectedBank }) {
                           borderRadius: "10px",
                         }}
                       >
-                        <div style={{fontSize: '14px'}}>Net Monthly Cash flow</div>
+                        <div style={{ fontSize: "14px" }}>
+                          Net Monthly Cash flow
+                        </div>
                         {isBiggestSum ? "+" : "-"}
                         {Math.floor(bigBar - smallBar)}€
                       </div>
@@ -191,7 +193,7 @@ export default function Home({ connectedBank }) {
                           backgroundColor: "orange",
                         }}
                       >
-                        {smallBar}€
+                        {Math.floor(smallBar)}€
                       </div>
                       <div>{isBiggestSum ? "Outflow" : "Inflow"}</div>
                     </div>
@@ -213,8 +215,14 @@ export default function Home({ connectedBank }) {
                         key={tac.transactionId}
                         className={styles.dashboard_dash_balances_item}
                       >
-                        <div>{tac.enrichment.displayName || "transaction"}</div>{" "}
-                        <div>{tac.transactionAmount.amount}€</div>
+                        <div>
+                          {tac.enrichment.displayName ||
+                            tac.debtorName ||
+                            "transaction"}
+                        </div>{" "}
+                        <div>
+                          {tac.transactionAmount.amount.replace(".", ",")}€
+                        </div>
                       </div>
                     ))}
                   </div>

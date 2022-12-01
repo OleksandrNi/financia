@@ -132,7 +132,18 @@ export default function UserInfoModal() {
               onChange={onChange}
             />
             <br />
-            <Button sx={{ mt: 2 }} variant="outlined" onClick={onSave}>
+            <Button
+              sx={{
+                mt: 2,
+                backgroundColor: "#CD447D",
+                color: "#fff",
+                ":hover": {
+                  color: "#000",
+                },
+              }}
+              variant="outlined"
+              onClick={onSave}
+            >
               SAVE
             </Button>
           </>

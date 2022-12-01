@@ -10,6 +10,5 @@ export const writeUserData = async (user, data, collection) => {
     console.log("Data was successfully sent to cloud firestore from function!");
   } catch (error) {
     console.log(error);
-    // alert(error);
   }
 };

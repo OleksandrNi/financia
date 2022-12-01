@@ -111,22 +111,38 @@ export default function ChangeEmailModal() {
             <br />
             <p style={{ color: "red" }}>{error}</p>
             <br />
-            <div style={{ display:'flex' }}>
-
-            <Button
-              sx={{ mt: 2, width: 3 / 5 }}
-              variant="outlined"
-              onClick={onSave}
-            >
-              Save
-            </Button>
-            <Button
-              sx={{ mt: 2, ml: 3, width: 3 / 5 }}
-              variant="outlined"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+            <div style={{ display: "flex" }}>
+              <Button
+                sx={{
+                  mt: 2,
+                  width: 3 / 5,
+                  backgroundColor: "#CD447D",
+                  color: "#fff",
+                  ":hover": {
+                    color: "#000",
+                  },
+                }}
+                variant="outlined"
+                onClick={onSave}
+              >
+                Save
+              </Button>
+              <Button
+                sx={{
+                  mt: 2,
+                  ml: 3,
+                  width: 3 / 5,
+                  backgroundColor: "#CD447D",
+                  color: "#fff",
+                  ":hover": {
+                    color: "#000",
+                  },
+                }}
+                variant="outlined"
+                onClick={handleClose}
+              >
+                Close
+              </Button>
             </div>
           </>
         </Box>

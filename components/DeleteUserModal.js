@@ -8,6 +8,7 @@ import { useUser } from "../firebase/useUser";
 import { useState } from "react";
 import { writeUserData } from "../firebase/writeUserData";
 import { TextField } from "@mui/material";
+import { deleteUserData } from "../firebase/deleteUserData";
 
 const style = {
   position: "absolute",
@@ -33,25 +34,22 @@ export default function DeleteUserModal() {
     const result = await deleteUserAccount(currentUserPassword);
     setCurrentUserPassword("");
     if (result) {
-      await writeUserData(
+      await deleteUserData(user, process.env.NEXT_PUBLIC_FIREBASE_USER_DATA);
+      await deleteUserData(
         user,
-        null,
-        process.env.NEXT_PUBLIC_FIREBASE_USER_DATA
-      );
-      await writeUserData(
-        user,
-        null,
         process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_BANK_LIST
       );
-      await writeUserData(
+      await deleteUserData(
         user,
-        null,
         process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_ACCOUNT_BANK_DATA
       );
-      await writeUserData(
+      await deleteUserData(
         user,
-        null,
         process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_BANK_TO_APROVE
+      );
+      await deleteUserData(
+        user,
+        process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_COUNTRY_BANK_LIST
       );
       Router.push("/auth");
     } else {
@@ -95,7 +93,14 @@ export default function DeleteUserModal() {
           <p style={{ color: "red" }}>{error}</p>
           <>
             <Button
-              sx={{ mt: 2 }}
+              sx={{
+                mt: 2,
+                backgroundColor: "#CD447D",
+                color: "#fff",
+                ":hover": {
+                  color: "#000",
+                },
+              }}
               variant="outlined"
               onClick={() => onDeleteAccount()}
             >
@@ -103,12 +108,21 @@ export default function DeleteUserModal() {
             </Button>
 
             <Button
-                sx={{ mt: 2, ml: 3, width: 1 / 5 }}
-                variant="outlined"
-                onClick={handleClose}
-              >
-                Close
-              </Button>
+              sx={{
+                mt: 2,
+                ml: 3,
+                width: 1 / 5,
+                backgroundColor: "#CD447D",
+                color: "#fff",
+                ':hover': {
+                  color: "#000"
+                }
+              }}
+              variant="outlined"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
           </>
         </Box>
       </Modal>

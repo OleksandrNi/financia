@@ -57,7 +57,13 @@ export function MainLayout({ children, title }) {
         </div>
         <div className={styles.header_menu}></div>
         <Button
-          sx={{ widht: "28px", fontSize: "10px", padding: "2px" }}
+          sx={{
+            widht: "28px",
+            fontSize: "10px",
+            padding: "2px",
+            backgroundColor: "#CD447D",
+            color: "#fff",
+          }}
           variant="outlined"
           onClick={() => logout()}
         >
@@ -69,22 +75,22 @@ export function MainLayout({ children, title }) {
         <div className={styles.footer_nav}>
           <Link href={"/"}>
             <a className={styles.footer_link}>
-              <WindowIcon sx={{ color: "grey" }} />
+              <WindowIcon sx={{ color: "black" }} />
             </a>
           </Link>
           <Link href={"/blog"}>
             <a className={styles.footer_link}>
-              <RssFeedIcon sx={{ color: "grey" }} />
+              <RssFeedIcon sx={{ color: "black" }} />
             </a>
           </Link>
           <Link href={"/settings"}>
             <a className={styles.footer_link}>
-              <SettingsIcon sx={{ color: "grey" }} />
+              <SettingsIcon sx={{ color: "black" }} />
             </a>
           </Link>
           <Link href={"/add-bank"}>
             <a className={styles.footer_link}>
-              <AddIcon sx={{ color: "grey" }} />
+              <AddIcon sx={{ color: "black" }} />
             </a>
           </Link>
         </div>

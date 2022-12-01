@@ -4,12 +4,13 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap"
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="theme-color" content="#042940" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Playfair+Display:wght@400;700&display=swap"
           rel="stylesheet"
-        /> */}
-        {/* <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/> */}
-        <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
+        />
       </Head>
       <body>
         <Main />

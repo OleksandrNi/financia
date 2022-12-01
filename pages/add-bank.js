@@ -30,9 +30,6 @@ export default function addBank({ institutions }) {
 
   if (!user) return null;
 
-  console.log("instit", institutions);
-  console.log("userBank", bankList);
-
   return (
     <MainLayout title={"Add bank"}>
       <div className={styles.addbank}>
@@ -65,9 +62,9 @@ export default function addBank({ institutions }) {
                   </Link>
                 </li>
               ))}
-            <Link href={`/api/SANDBOXFINANCE_SFIN0000`}>
+            {/* <Link href={`/api/SANDBOXFINANCE_SFIN0000`}>
               <a className={styles.link}>SandBox test account</a>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

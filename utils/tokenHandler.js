@@ -4,7 +4,7 @@ import { writeUserData } from "../firebase/writeUserData";
 
 export const tokenHandler = async (client) => {
   let nordigenTokens = await readUserData(
-    { id: process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_LIST },
+    { id: process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_DATA },
     process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_DATA
   );
 
@@ -38,7 +38,7 @@ export const tokenHandler = async (client) => {
   }
 
   await writeUserData(
-    { id: process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_LIST },
+    { id: process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_DATA },
     nordigenTokens.data,
     process.env.NEXT_PUBLIC_FIREBASE_USER_NORDIGEN_TOKEN_DATA
   );

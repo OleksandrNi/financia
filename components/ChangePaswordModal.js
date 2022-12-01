@@ -169,14 +169,31 @@ export default function ChangePaswordModal() {
             <br />
             <div style={{ display: "flex" }}>
               <Button
-                sx={{ mt: 2, width: 1 / 3 }}
+                sx={{
+                  mt: 2,
+                  width: 1 / 3,
+                  backgroundColor: "#CD447D",
+                  color: "#fff",
+                  ':hover': {
+                    color: "#000"
+                  }
+                }}
                 variant="outlined"
                 onClick={onSave}
               >
                 Save
               </Button>
               <Button
-                sx={{ mt: 2, ml: 3, width: 1 / 3 }}
+                sx={{
+                  mt: 2,
+                  ml: 3,
+                  width: 1 / 3,
+                  backgroundColor: "#CD447D",
+                  color: "#fff",
+                  ':hover': {
+                    color: "#000"
+                  }
+                }}
                 variant="outlined"
                 onClick={handleClose}
               >
